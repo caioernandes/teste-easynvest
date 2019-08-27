@@ -8,7 +8,8 @@ class InvestmentFormContract {
 
     interface View: BaseContract.View {
         fun viewRequestInvestment(result: InvestmentResponse)
-        fun showMessageError(error: String)
+        fun showProgress(enable: Boolean)
+        fun showErrorMessage(error: String)
     }
 
     interface Presenter: BaseContract.Presenter<View> {

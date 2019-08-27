@@ -6,15 +6,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class InvestmentFormPresenter: InvestmentFormContract.Presenter {
+class InvestmentFormPresenter : InvestmentFormContract.Presenter {
 
     private val subscriptions = CompositeDisposable()
     private lateinit var view: InvestmentFormContract.View
     private val api: ApiServiceInterface = ApiServiceInterface.create()
 
-    override fun subscribe() {
-
-    }
+    override fun subscribe() { }
 
     override fun unsubscribe() {
         subscriptions.clear()
@@ -25,14 +23,20 @@ class InvestmentFormPresenter: InvestmentFormContract.Presenter {
     }
 
     override fun presentSendDataInvestment(request: InvestmentRequest) {
-        val subscribe = api.calculateFutureValues(request).subscribeOn(Schedulers.io())
+        val subscribe = api.calculateFutureValues(
+            request.investedAmount,
+            request.index,
+            request.rate,
+            request.isTaxFree,
+            request.maturityDate
+        ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                //view.showProgress(false)
+                view.showProgress(false)
                 view.viewRequestInvestment(it)
             }, { error ->
-                //view.showProgress(false)
-                //view.showErrorMessage(error.localizedMessage)
+                view.showProgress(false)
+                view.showErrorMessage(error.localizedMessage)
             })
 
         subscriptions.add(subscribe)

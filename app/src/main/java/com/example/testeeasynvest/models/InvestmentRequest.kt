@@ -1,6 +1,7 @@
 package com.example.testeeasynvest.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class InvestmentRequest(
     @SerializedName("investedAmount") var investedAmount: Double,
@@ -8,7 +9,7 @@ data class InvestmentRequest(
     @SerializedName("rate") var rate: Int,
     @SerializedName("isTaxFree") var isTaxFree: Boolean,
     @SerializedName("maturityDate") var maturityDate: String
-)
+): Serializable
 
 /*
     investedAmount = 32323.0                 // Valor a investir em reais

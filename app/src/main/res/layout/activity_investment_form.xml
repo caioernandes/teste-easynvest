@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <faranjit.currency.edittext.CurrencyEditText
         android:id="@+id/value_investment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,7 +33,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:locale="pt_BR"
+        app:showSymbol="true" />
 
     <TextView
         android:id="@+id/textView2"
@@ -48,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/value_investment" />
 
-    <EditText
+    <com.vicmikhailau.maskededittext.MaskedEditText
         android:id="@+id/due_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -58,11 +60,13 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:hint="dia/mês/ano"
+        android:inputType="date"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:mask="##/##/####" />
 
     <TextView
         android:id="@+id/textView3"
@@ -87,6 +91,7 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:hint="100%"
+        android:inputType="number"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -95,7 +100,7 @@
 
     <Button
         android:id="@+id/btn_simulator"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -106,7 +111,22 @@
         android:text="Simular"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/investment_percentage"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/investment_percentage" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="264dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
