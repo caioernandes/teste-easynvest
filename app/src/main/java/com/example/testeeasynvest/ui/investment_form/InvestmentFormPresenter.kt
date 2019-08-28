@@ -12,7 +12,7 @@ class InvestmentFormPresenter : InvestmentFormContract.Presenter {
     private lateinit var view: InvestmentFormContract.View
     private val api: ApiServiceInterface = ApiServiceInterface.create()
 
-    override fun subscribe() { }
+    override fun subscribe() {}
 
     override fun unsubscribe() {
         subscriptions.clear()
@@ -23,22 +23,25 @@ class InvestmentFormPresenter : InvestmentFormContract.Presenter {
     }
 
     override fun presentSendDataInvestment(request: InvestmentRequest) {
-        val subscribe = api.calculateFutureValues(
-            request.investedAmount,
-            request.index,
-            request.rate,
-            request.isTaxFree,
-            request.maturityDate
-        ).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                view.showProgress(false)
-                view.viewRequestInvestment(it)
-            }, { error ->
-                view.showProgress(false)
-                view.showErrorMessage(error.localizedMessage)
-            })
-
-        subscriptions.add(subscribe)
+        try {
+            val subscribe = api.calculateFutureValues(
+                request.investedAmount,
+                request.index,
+                request.rate,
+                request.isTaxFree,
+                request.maturityDate
+            ).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    view.showProgress(false)
+                    view.viewRequestInvestment(it)
+                }, { error ->
+                    view.showProgress(false)
+                    view.showErrorMessage(error.localizedMessage)
+                })
+            subscriptions.add(subscribe)
+        } catch (e: Exception) {
+            view.showErrorMessage(e.localizedMessage)
+        }
     }
 }

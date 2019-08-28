@@ -13,7 +13,7 @@ data class InvestmentResponse(
     @SerializedName("annualGrossRateProfit") val annualGrossRateProfit: Double,
     @SerializedName("monthlyGrossRateProfit") val monthlyGrossRateProfit: Double,
     @SerializedName("dailyGrossRateProfit") val dailyGrossRateProfit: Double,
-    @SerializedName("taxesRate") val taxesRate: Int,
+    @SerializedName("taxesRate") val taxesRate: Double,
     @SerializedName("rateProfit") val rateProfit: Double,
     @SerializedName("annualNetRateProfit") val annualNetRateProfit: Double
 ) : Serializable
