@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Teste Easynvest</string>
+    <string name="validate_value_investment">Informe o quanto você gostaria de aplicar.</string>
+    <string name="validate_edtdueDate">Informe a data de vencimento do investimento.</string>
+    <string name="validate_investment_percentage">Informe o percentual do CDI do investimento.</string>
+    <string name="error_occurred">Ocorreu um erro.</string>
+    <string name="no_connection">Sem conexão com a internet.</string>
+    <string name="verify_no_connection">Verifique a conexão com a internet e tente novamente.</string>
+</resources>

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Teste Easynvest</string>
+    <string name="validate_value_investment">Enter how much you would like to apply.</string>
+    <string name="validate_edtdueDate">Enter the due date of the investment.</string>
+    <string name="validate_investment_percentage">Enter the percentage of investment CDI</string>
+    <string name="error_occurred">An error has occurred.</string>
+    <string name="no_connection">No internet connection.</string>
+    <string name="verify_no_connection">Check your internet connection and try again.</string>
 </resources>

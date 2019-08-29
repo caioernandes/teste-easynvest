@@ -95,8 +95,8 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
             }
         } else {
             Helpers.alertDialog(
-                "Sem conexão com a internet.",
-                "Verifique a conexão com a internet e tente novamente.",
+                getString(R.string.no_connection),
+                getString(R.string.verify_no_connection),
                 this
             )
         }
@@ -111,13 +111,13 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
 
     override fun showErrorMessage(error: String) {
         Log.e("Error", error)
-        Helpers.alertDialog("Ocorreu um erro", error, this)
+        Helpers.alertDialog(getString(R.string.error_occurred), error, this)
     }
 
     fun valid(showError: Boolean): Boolean {
         if (!validateNotNull(
                 edtValueInvestment,
-                "* Informe o quanto você gostaria de aplicar.",
+                getString(R.string.validate_value_investment),
                 showError
             )
         ) {
@@ -125,7 +125,7 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
         }
         if (!validateNotNull(
                 edtDueDate,
-                "* Informe a data de vencimento do investimento.",
+                getString(R.string.validate_edtdueDate),
                 showError
             )
         ) {
@@ -133,7 +133,7 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
         }
         if (!validateNotNull(
                 investmentPercentage,
-                "* Informe o percentual do CDI do investimento.",
+                getString(R.string.validate_investment_percentage),
                 showError
             )
         ) {
