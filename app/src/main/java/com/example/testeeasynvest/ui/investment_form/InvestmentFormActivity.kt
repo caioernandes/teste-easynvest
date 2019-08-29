@@ -2,10 +2,14 @@ package com.example.testeeasynvest.ui.investment_form
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.content.ContextCompat.getDrawable
 import com.example.testeeasynvest.R
 import com.example.testeeasynvest.di.component.DaggerActivityComponent
 import com.example.testeeasynvest.di.module.ActivityModule
@@ -15,18 +19,18 @@ import com.example.testeeasynvest.ui.base.BaseAppCompatActivity
 import com.example.testeeasynvest.ui.result_investment.ResultInvestmentActivity
 import com.example.testeeasynvest.util.Constants
 import com.example.testeeasynvest.util.Helpers
+import com.example.testeeasynvest.util.Helpers.Companion.validateNotNull
+import com.example.testeeasynvest.util.InputFilterMinMax
 import kotlinx.android.synthetic.main.activity_investment_form.*
 import javax.inject.Inject
-import com.example.testeeasynvest.util.InputFilterMinMax
-import android.text.InputFilter
 
 class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.View,
-    View.OnClickListener {
+    View.OnClickListener, TextWatcher {
 
-    lateinit var edtValueInvestment: EditText
-    lateinit var edtDueDate: EditText
-    lateinit var investmentPercentage: EditText
-    lateinit var btnSimulator: Button
+    private lateinit var edtValueInvestment: EditText
+    private lateinit var edtDueDate: EditText
+    private lateinit var investmentPercentage: EditText
+    private lateinit var btnSimulator: Button
 
     @Inject
     lateinit var presenter: InvestmentFormContract.Presenter
@@ -51,8 +55,11 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
         edtDueDate = findViewById(R.id.due_date)
         investmentPercentage = findViewById(R.id.investment_percentage)
         btnSimulator = findViewById(R.id.btn_simulator)
-        btnSimulator.setOnClickListener(this)
 
+        btnSimulator.setOnClickListener(this)
+        edtValueInvestment.addTextChangedListener(this)
+        edtDueDate.addTextChangedListener(this)
+        investmentPercentage.addTextChangedListener(this)
         investmentPercentage.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 999))
     }
 
@@ -62,6 +69,7 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
         bundle.putSerializable(Constants.INVESTMENT_RESPONSE, result)
         intent.putExtras(bundle)
         startActivity(intent)
+        finish()
     }
 
     private fun injectDependency() {
@@ -73,26 +81,85 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
     }
 
     override fun onClick(view: View) {
-        val request = InvestmentRequest(
-            edtValueInvestment.text.toString().toDouble(),
-            "CDI",
-            investmentPercentage.text.toString().toInt(),
-            false,
-            Helpers.formatDateReverse(edtDueDate.text.toString())
-        )
-        presenter.presentSendDataInvestment(request)
+
+        if (Helpers.verifyAvailableNetwork(this)) {
+            if (valid(true)) {
+                val request = InvestmentRequest(
+                    edtValueInvestment.text.toString().toDouble(),
+                    "CDI",
+                    investmentPercentage.text.toString().toInt(),
+                    false,
+                    Helpers.formatDateReverse(edtDueDate.text.toString())
+                )
+                presenter.presentSendDataInvestment(request)
+            }
+        } else {
+            Helpers.alertDialog(
+                "Sem conexão com a internet.",
+                "Verifique a conexão com a internet e tente novamente.",
+                this
+            )
+        }
     }
 
     override fun showProgress(enable: Boolean) {
-        if (enable) {
+        if (enable)
             progressBar.visibility = View.VISIBLE
-        } else {
+        else
             progressBar.visibility = View.GONE
-        }
     }
 
     override fun showErrorMessage(error: String) {
         Log.e("Error", error)
-        Helpers.alertDialog("Ocorreu um erro", error)
+        Helpers.alertDialog("Ocorreu um erro", error, this)
+    }
+
+    fun valid(showError: Boolean): Boolean {
+        if (!validateNotNull(
+                edtValueInvestment,
+                "* Informe o quanto você gostaria de aplicar.",
+                showError
+            )
+        ) {
+            return false
+        }
+        if (!validateNotNull(
+                edtDueDate,
+                "* Informe a data de vencimento do investimento.",
+                showError
+            )
+        ) {
+            return false
+        }
+        if (!validateNotNull(
+                investmentPercentage,
+                "* Informe o percentual do CDI do investimento.",
+                showError
+            )
+        ) {
+            return false
+        }
+
+        return true
+    }
+
+    private fun validateButtonSimulator() {
+        if (valid(false)) {
+            btnSimulator.background = getDrawable(this, R.drawable.buttonshape_enabled)
+        } else {
+            btnSimulator.background = getDrawable(this, R.drawable.buttonshape)
+        }
+    }
+
+    override fun afterTextChanged(s: Editable?) {
+        validateButtonSimulator()
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
     }
 }

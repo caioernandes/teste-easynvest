@@ -33,7 +33,7 @@ class InvestmentFormPresenter : InvestmentFormContract.Presenter {
             ).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    view.showProgress(false)
+                    view.showProgress(true)
                     view.viewRequestInvestment(it)
                 }, { error ->
                     view.showProgress(false)

@@ -6,6 +6,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.testeeasynvest.BaseApp
 import java.text.SimpleDateFormat
+import android.text.TextUtils
+import android.text.Editable
+import android.view.View
+import android.widget.EditText
+
+
 
 class Helpers {
     companion object {
@@ -28,28 +34,37 @@ class Helpers {
             return formatter.format(parser.parse(dateParam))
         }
 
-        fun alertDialog(title: String, message: String) {
-
-            // Initialize a new instance of
-            val builder = AlertDialog.Builder(BaseApp.instance)
-
-            // Set the alert dialog title
+        fun alertDialog(title: String, message: String, context: Context) {
+            val builder = AlertDialog.Builder(context)
             builder.setTitle(title)
-
-            // Display a message on alert dialog
             builder.setMessage(message)
-
-            // Set a positive button and its click listener on alert dialog
-            builder.setPositiveButton("YES") { dialog, which ->
-                // Do something when user press the positive button
+            builder.setPositiveButton("OK") { dialog, which ->
                 dialog.dismiss()
             }
-
-            // Finally, make the alert dialog using builder
             val dialog: AlertDialog = builder.create()
-
-            // Display the alert dialog on app interface
             dialog.show()
+        }
+
+        fun validateNotNull(pView: View, pMessage: String, showError: Boolean): Boolean {
+            if (pView is EditText) {
+                val edText = pView
+                val text = edText.text
+                if (text != null) {
+                    val strText = text.toString()
+                    if (!TextUtils.isEmpty(strText)) {
+                        return true
+                    }
+                }
+
+                if (showError) {
+                    edText.error = pMessage
+                    edText.isFocusable = true
+                    edText.requestFocus()
+                }
+
+                return false
+            }
+            return false
         }
     }
 }
