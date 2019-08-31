@@ -6,4 +6,8 @@
     <string name="error_occurred">An error has occurred.</string>
     <string name="no_connection">No internet connection.</string>
     <string name="verify_no_connection">Check your internet connection and try again.</string>
+    <string name="simulate">Simulate</string>
+    <string name="investment_value">How much would you like to apply? *</string>
+    <string name="due_date">What is the investment due date? *</string>
+    <string name="investment_percentage">What is the CDI percentage of the investment? *</string>
 </resources>
