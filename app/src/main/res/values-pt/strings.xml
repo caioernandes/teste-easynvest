@@ -11,4 +11,21 @@
     <string name="investment_value">Quanto você gostaria de aplicar? *</string>
     <string name="due_date">Qual a data de vencimento do investimento? *</string>
     <string name="investment_percentage">Qual o percentual do CDI do investimento? *</string>
+    <string name="hint_date">dia/mês/ano</string>
+    <string name="Value_initially_applied">Valor aplicado inicialmente</string>
+    <string name="gross_value_investment">Valor bruto do investimento</string>
+    <string name="income_value">Valor do rendimento</string>
+    <string name="ir_investment">IR sobre o investimento</string>
+    <string name="net_investment_value">Valor líquido sobre o investimento</string>
+    <string name="redemption_date">Data de resgate</string>
+    <string name="calendar_days">Dias corridos</string>
+    <string name="monthly_income">Rendimento mensal</string>
+    <string name="investment_cdi_Percentage">Percentual do CDI do investimento</string>
+    <string name="annual_profitability">Rentabilidade anual</string>
+    <string name="profitability_of_the_period">Rentabilidade do período</string>
+    <string name="simulate_again">Simular novamente</string>
+    <string name="simulation_result">Resultado da simulação</string>
+    <string name="total_income_rs">Rendimento total de R$</string>
+    <string name="rs">R$ </string>
+    <string name="percente">%</string>
 </resources>

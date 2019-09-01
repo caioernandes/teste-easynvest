@@ -10,7 +10,7 @@ import android.text.TextUtils
 import android.text.Editable
 import android.view.View
 import android.widget.EditText
-
+import java.text.DecimalFormat
 
 
 class Helpers {
@@ -65,6 +65,11 @@ class Helpers {
                 return false
             }
             return false
+        }
+
+        fun truncate(value: Double): String {
+            val df = DecimalFormat("#.00")
+            return df.format(value)
         }
     }
 }

@@ -10,4 +10,21 @@
     <string name="investment_value">How much would you like to apply? *</string>
     <string name="due_date">What is the investment due date? *</string>
     <string name="investment_percentage">What is the CDI percentage of the investment? *</string>
+    <string name="hint_date">day/month/year</string>
+    <string name="Value_initially_applied">Value initially applied</string>
+    <string name="gross_value_investment">Gross value of the investment</string>
+    <string name="income_value">Income value</string>
+    <string name="ir_investment">IR on investment</string>
+    <string name="net_investment_value">Net investment value</string>
+    <string name="redemption_date">Redemption Date</string>
+    <string name="calendar_days">Calendar days</string>
+    <string name="monthly_income">Monthly income</string>
+    <string name="investment_cdi_Percentage">Investment CDI Percentage</string>
+    <string name="annual_profitability">Annual profitability</string>
+    <string name="profitability_of_the_period">Profitability of the period</string>
+    <string name="simulate_again">Simulate again</string>
+    <string name="simulation_result">Simulation Result</string>
+    <string name="total_income_rs">Total income of R$</string>
+    <string name="rs">R$ </string>
+    <string name="percente">%</string>
 </resources>

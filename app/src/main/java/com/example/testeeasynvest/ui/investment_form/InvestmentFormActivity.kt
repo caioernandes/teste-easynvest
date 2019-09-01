@@ -17,10 +17,8 @@ import com.example.testeeasynvest.models.InvestmentRequest
 import com.example.testeeasynvest.models.InvestmentResponse
 import com.example.testeeasynvest.ui.base.BaseAppCompatActivity
 import com.example.testeeasynvest.ui.result_investment.ResultInvestmentActivity
-import com.example.testeeasynvest.util.Constants
-import com.example.testeeasynvest.util.Helpers
+import com.example.testeeasynvest.util.*
 import com.example.testeeasynvest.util.Helpers.Companion.validateNotNull
-import com.example.testeeasynvest.util.InputFilterMinMax
 import kotlinx.android.synthetic.main.activity_investment_form.*
 import javax.inject.Inject
 
@@ -61,6 +59,8 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
         edtDueDate.addTextChangedListener(this)
         investmentPercentage.addTextChangedListener(this)
         investmentPercentage.filters = arrayOf<InputFilter>(InputFilterMinMax(0, 999))
+
+        edtValueInvestment.addTextChangedListener(Mask.monetary(edtValueInvestment))
     }
 
     override fun viewRequestInvestment(result: InvestmentResponse) {
@@ -69,7 +69,6 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
         bundle.putSerializable(Constants.INVESTMENT_RESPONSE, result)
         intent.putExtras(bundle)
         startActivity(intent)
-        finish()
     }
 
     private fun injectDependency() {
@@ -85,7 +84,8 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
         if (Helpers.verifyAvailableNetwork(this)) {
             if (valid(true)) {
                 val request = InvestmentRequest(
-                    edtValueInvestment.text.toString().toDouble(),
+                    edtValueInvestment.text.toString().replace(",", "")
+                        .toDouble(),
                     "CDI",
                     investmentPercentage.text.toString().toInt(),
                     false,
@@ -162,4 +162,6 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
     }
+
+
 }

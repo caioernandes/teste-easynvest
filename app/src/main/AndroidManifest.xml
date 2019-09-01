@@ -12,7 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.result_investment.ResultInvestmentActivity"></activity>
+        <activity
+            android:name=".ui.result_investment.ResultInvestmentActivity"
+            android:parentActivityName=".ui.investment_form.InvestmentFormActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.investment_form.InvestmentFormActivity" />
+        </activity>
         <activity android:name=".ui.investment_form.InvestmentFormActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

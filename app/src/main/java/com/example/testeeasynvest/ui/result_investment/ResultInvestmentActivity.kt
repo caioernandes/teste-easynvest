@@ -37,22 +37,29 @@ class ResultInvestmentActivity : BaseAppCompatActivity() {
     }
 
     private fun populateFields(response: InvestmentResponse) {
-        gross_value_investment_large.text = "R$" + response.grossAmount.toString()
+        gross_value_investment_large.text =
+            getString(R.string.rs) + Helpers.truncate(response.grossAmount)
         yield_value_large.text =
-            "Rendimento total de R$" + response.grossAmountProfit.toString()
-
-        value_initially_applied.text = response.investmentParameter.investedAmount.toString()
-        gross_value_investment.text = response.grossAmount.toString()
-        yield_value.text = response.grossAmountProfit.toString()
+            getString(R.string.total_income_rs) + Helpers.truncate(response.grossAmountProfit)
+        value_initially_applied.text =
+            getString(R.string.rs) + Helpers.truncate(response.investmentParameter.investedAmount.toDouble())
+        gross_value_investment.text = getString(R.string.rs) + response.grossAmount.toString()
+        yield_value.text = getString(R.string.rs) + Helpers.truncate(response.grossAmountProfit)
         ir_investment.text =
-            response.taxesAmount.toString() + "/" + response.taxesRate.toString()
-        net_investment_value.text = response.netAmount.toString()
+            getString(R.string.rs) + response.taxesAmount.toString() + "[" + response.taxesRate.toString() + getString(
+                R.string.percente
+            ) + "]"
+        net_investment_value.text = getString(R.string.rs) + response.netAmount.toString()
         redemption_date.text = Helpers.formatDate(response.investmentParameter.maturityDate)
         busy_days.text = response.investmentParameter.maturityTotalDays.toString()
-        mensal_rendemption.text = response.monthlyGrossRateProfit.toString()
-        cdi_investment.text = response.investmentParameter.rate.toString()
-        annual_profitability.text = response.investmentParameter.yearlyInterestRate.toString()
-        period_profitability.text = response.rateProfit.toString()
+        mensal_rendemption.text =
+            response.monthlyGrossRateProfit.toString() + getString(R.string.percente)
+        cdi_investment.text =
+            response.investmentParameter.rate.toString() + getString(R.string.percente)
+        annual_profitability.text =
+            Helpers.truncate(response.investmentParameter.yearlyInterestRate) + getString(R.string.percente)
+        period_profitability.text =
+            Helpers.truncate(response.rateProfit) + getString(R.string.percente)
     }
 
     override fun onBackPressed() {

@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="dia/mês/ano"
+            android:hint="@string/hint_date"
             android:inputType="date"
             android:textSize="@dimen/super_large_text"
             app:layout_constraintEnd_toEndOf="parent"

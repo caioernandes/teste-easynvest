@@ -4,28 +4,28 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class InvestmentResponse(
-    @SerializedName("investmentParameter") val investmentParameter: InvestmentParameter,
-    @SerializedName("grossAmount") val grossAmount: Double,
-    @SerializedName("taxesAmount") val taxesAmount: Double,
-    @SerializedName("netAmount") val netAmount: Double,
-    @SerializedName("grossAmountProfit") val grossAmountProfit: Double,
-    @SerializedName("netAmountProfit") val netAmountProfit: Double,
-    @SerializedName("annualGrossRateProfit") val annualGrossRateProfit: Double,
-    @SerializedName("monthlyGrossRateProfit") val monthlyGrossRateProfit: Double,
-    @SerializedName("dailyGrossRateProfit") val dailyGrossRateProfit: Double,
-    @SerializedName("taxesRate") val taxesRate: Double,
-    @SerializedName("rateProfit") val rateProfit: Double,
-    @SerializedName("annualNetRateProfit") val annualNetRateProfit: Double
+    @SerializedName("investmentParameter") var investmentParameter: InvestmentParameter = InvestmentParameter(),
+    @SerializedName("grossAmount") var grossAmount: Double = 0.0,
+    @SerializedName("taxesAmount") var taxesAmount: Double = 0.0,
+    @SerializedName("netAmount") var netAmount: Double = 0.0,
+    @SerializedName("grossAmountProfit") var grossAmountProfit: Double = 0.0,
+    @SerializedName("netAmountProfit") val netAmountProfit: Double = 0.0,
+    @SerializedName("annualGrossRateProfit") var annualGrossRateProfit: Double = 0.0,
+    @SerializedName("monthlyGrossRateProfit") var monthlyGrossRateProfit: Double = 0.0,
+    @SerializedName("dailyGrossRateProfit") var dailyGrossRateProfit: Double = 0.0,
+    @SerializedName("taxesRate") var taxesRate: Double = 0.0,
+    @SerializedName("rateProfit") var rateProfit: Double = 0.0,
+    @SerializedName("annualNetRateProfit") var annualNetRateProfit: Double = 0.0
 ) : Serializable
 
 data class InvestmentParameter(
-    @SerializedName("investedAmount") val investedAmount: Int,
-    @SerializedName("yearlyInterestRate") val yearlyInterestRate: Double,
-    @SerializedName("maturityTotalDays") val maturityTotalDays: Int,
-    @SerializedName("maturityBusinessDays") val maturityBusinessDays: Int,
-    @SerializedName("maturityDate") val maturityDate: String,
-    @SerializedName("rate") val rate: Int,
-    @SerializedName("isTaxFree") val isTaxFree: Boolean
+    @SerializedName("investedAmount") var investedAmount: Int = 0,
+    @SerializedName("yearlyInterestRate") var yearlyInterestRate: Double = 0.0,
+    @SerializedName("maturityTotalDays") var maturityTotalDays: Int = 0,
+    @SerializedName("maturityBusinessDays") var maturityBusinessDays: Int = 0,
+    @SerializedName("maturityDate") var maturityDate: String = "",
+    @SerializedName("rate") var rate: Int = 0,
+    @SerializedName("isTaxFree") var isTaxFree: Boolean = false
 ) : Serializable
 
 /*
