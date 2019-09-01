@@ -18,9 +18,4 @@ class ActivityModule(private var activity: Activity) {
     fun providePresenterInvestmentFormActivity(): InvestmentFormContract.Presenter {
         return InvestmentFormPresenter()
     }
-
-    /*@Provides
-    fun providePresenterInvestmentResultDetail(): DetailMovieContract.Presenter {
-        return DetailMoviePresenter()
-    }*/
 }
