@@ -114,7 +114,15 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
         Helpers.alertDialog(getString(R.string.error_occurred), error, this)
     }
 
-    fun valid(showError: Boolean): Boolean {
+    private fun validateButtonSimulator() {
+        if (valid(false)) {
+            btnSimulator.background = getDrawable(this, R.drawable.buttonshape_enabled)
+        } else {
+            btnSimulator.background = getDrawable(this, R.drawable.buttonshape)
+        }
+    }
+
+    private fun valid(showError: Boolean): Boolean {
         if (!validateNotNull(
                 edtValueInvestment,
                 getString(R.string.validate_value_investment),
@@ -141,14 +149,6 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
         }
 
         return true
-    }
-
-    private fun validateButtonSimulator() {
-        if (valid(false)) {
-            btnSimulator.background = getDrawable(this, R.drawable.buttonshape_enabled)
-        } else {
-            btnSimulator.background = getDrawable(this, R.drawable.buttonshape)
-        }
     }
 
     override fun afterTextChanged(s: Editable?) {
