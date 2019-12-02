@@ -162,6 +162,4 @@ class InvestmentFormActivity : BaseAppCompatActivity(), InvestmentFormContract.V
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
     }
-
-
 }
